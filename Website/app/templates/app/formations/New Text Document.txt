@@ -1,0 +1,8 @@
+		const backgroundcolor = [];
+		const bordercolor = [];
+		for (i = 0; i < labels_SS.length; i++) {
+		const r = Math.floor(Math.random() * 255);
+		const g = Math.floor(Math.random() * 255);
+		const b = Math.floor(Math.random() * 255);
+		backgroundcolor.push('rgba('+r+', '+g+', '+b+', 0.2)');
+		bordercolor.push('rgba('+r+', '+g+', '+b+', 1)');

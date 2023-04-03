@@ -1,0 +1,229 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Event Calendar{% endblock title %}
+
+{% block extracss %}
+  <link href="{% static 'calender/main.css' %}" rel="stylesheet" />
+  <link type="text/css" href="/static/assets/vendor/notyf/notyf.min.css" rel="stylesheet">
+{% endblock extracss %}
+
+{% block breadcrumb %}
+  <div>
+      <h1><i class="fa fa-calendar"></i> Calendrier</h1>
+      <p>Calendrier Sessions</p>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+      <li class="breadcrumb-item"><a href="#">Calendrier</a></li>
+  </ul>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile row">
+            <div class="col-md-3">
+                <div id="external-events">
+                    <h4 class="mb-4">Sessions en cours</h4>
+                    {% for event in events_month %}
+                      <div class="fc-event">
+                          <h3>{{ event.title }}</h3>
+                          <p>De: {{ event.start_time|date:'d M,Y H:i' }}</p>
+                          <p>A: {{ event.end_time|date:'d M,Y H:i'  }}</p>
+                      </div>
+                    {% empty %}
+                      <p>Aucune Session en cours</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div id="calendar"></div>
+            </div>
+
+            <div class="modal fade show" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <h5 class="modal-title text-white" id="exampleModalLongTitle">Ajouter Session</h5>
+                            <button id="modalClose1" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Nom Session:</label>
+                                    {{ form.title }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Formation:</label>
+                                    {{ form.formation }}
+                                </div>
+								<div class="form-group">
+                                    <label for="message-text" class="col-form-label">Salle:</label>
+                                    {{ form.salle }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Date Début:</label>
+                                    {{ form.start_time }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Date Fin:</label>
+                                    {{ form.end_time }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="modalClose2" type="button" class="btn btn-danger">Fermer</button>
+                                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+			            <div class="modal fade show" id="eventModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <h5 class="modal-title text-white" id="exampleModalLongTitle">Supprimer Session</h5>
+                        </div>
+                        <form>
+						<br><br>
+                            <h5>Voulez vous supprimer la session ?</H5>
+                            <div class="modal-footer">
+                                <button id="modalClose3" type="button" class="btn btn-danger">Non</button>
+                                <button id="removeBtn" type="button" class="btn btn-primary">Oui</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrascripts %}
+  <script src="{% static 'calender/main.js' %}"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var today = new Date();
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+			slotMinTime: "07:00:00",
+			slotMaxTime: "21:00:00",
+			locale:'fr',
+			headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
+			
+			},
+			buttonText: {
+               today: 'Aujourd\'hui',
+               month: 'Mois',
+			   week: 'Semaine',
+			   day: 'Jour',
+			   list: 'Liste'
+               
+                },
+				
+          initialDate: today,
+          navLinks: true, 
+          selectable: true,
+          selectMirror: true,
+          selectHelper: true,
+          editable: true,
+		  weekends: true,
+		  eventLimit: true,
+          select: function(arg) {
+            console.log('clicked')
+            var modal = document.getElementById('eventModal')
+            modal.style.display = 'block'
+            calendar.unselect()
+          },
+        eventResize: function (arg) {
+                    var start_time = arg.event.start;
+					console.log(start_time);
+                    var end_time = arg.event.end;
+					console.log(end_time);
+                    var title = arg.event.title;
+                    $.ajax({
+                        type: "GET",
+                        url: '/update',
+                        data: {'title': title, 'start_time': start_time, 'end_time': end_time},
+                        dataType: "json",
+                        success: function (data) {
+                            window.location.replace(data.redirect_url);
+                        },
+                        failure: function (data) {
+                            alert('There is a problem!!!');
+                        }
+                    });
+                },
+
+                eventDrop: function (arg) {
+                    var start_time = arg.event.start;
+					console.log(start_time);
+                    var end_time = arg.event.end;
+					console.log(end_time);
+                    var title = arg.event.title;
+                    $.ajax({
+                        type: "GET",
+                        url: '/update',
+                        data: {'title': title, 'start_time': start_time, 'end_time': end_time},
+                        dataType: "json",
+                        success: function (data) {
+                            window.location.replace(data.redirect_url);
+                        },
+                        failure: function (data) {
+                            alert('There is a problem!!!');
+                        }
+                    });
+                },
+  
+		eventClick: function(arg) {
+				var modal = document.getElementById('eventModal1')
+				modal.style.display = 'block'
+				removeBtn.addEventListener('click',()=>{
+                        	var title = arg.event.title;
+							$.ajax({
+                            type: "GET",
+                            url: '/remove',
+                            data: {'title': title},
+                            dataType: "json",
+                            success: function (data) {
+								window.location.replace(data.redirect_url);
+                            },
+                            error: function (data) {
+                                alert('There is a problem!!!');
+                            }
+                        });
+			});
+		
+          },
+				
+          editable: true,
+          dayMaxEvents: true, 
+          events: {{ events|safe }},
+        });
+
+        calendar.render();
+      });
+      const closeBtn1 = document.getElementById('modalClose1');
+      const closeBtn2 = document.getElementById('modalClose2');
+	  const closeBtn3 = document.getElementById('modalClose3');
+      closeBtn1.addEventListener('click',()=>{
+        const eventModal = document.getElementById('eventModal')
+        eventModal.style.display = 'none';
+      });
+      closeBtn2.addEventListener('click',()=>{
+        const eventModal = document.getElementById('eventModal')
+        eventModal.style.display = 'none';
+      });
+	  closeBtn3.addEventListener('click',()=>{
+        const eventModal = document.getElementById('eventModal1')
+        eventModal.style.display = 'none';
+      });
+  </script>
+{% endblock extrascripts %}

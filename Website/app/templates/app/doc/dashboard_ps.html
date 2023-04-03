@@ -1,0 +1,375 @@
+{% extends "layouts/base_ps.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation_bis.html' %}
+
+        
+ <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">centre de formation++</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tableau de bord</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Tableau de bord</h2>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+			    <div class="row justify-content-md-center">
+        <div class="col-12 mb-4">
+            <div class="card bg-secondary-alt shadow-sm">
+                <div class="card-header d-sm-flex flex-row align-items-center flex-0">
+                    <div class="d-block mb-3 mb-sm-0">
+                        <div class="h5 fw-normal mb-2">Nombres Total Formations</div>
+                        <h2 class="h3">{{ Total }}</h2>
+                    </div>
+                </div>
+                <div class="card-body p-2">
+				<div class="chart"><canvas id="line_chart"></canvas></div>
+                </div>
+            </div>
+        </div>
+        </div>
+		<div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Formations</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="bar_chart"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Formations</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="bar_chart_2"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+            <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h5">Nombres Sessions En Cours</h2>
+                                    <h3 class="mb-1">{{ Total_running }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-12 col-sm-6 col-xl-4 mb-4">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h5">Nombres Sessions Non Commencées</h2>
+                                    <h3 class="mb-1">{{ Total_upcoming }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="col-12 col-sm-6 col-xl-4 mb-4">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body">
+                        <div class="row d-block d-xl-flex align-items-center">
+                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
+                            </div>
+                            <div class="col-12 col-xl-7 px-xl-0">
+                                <div class="d-none d-sm-block">
+                                    <h2 class="h5">Nombres Sessions Terminées</h2>
+                                    <h3 class="mb-1">{{ Total_finished }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Sessions</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                            <div class="d-block ml-auto">
+                                <div class="d-flex align-items-center text-right mb-2">
+                                    <span class="font-weight-normal small">Salle 1 : {{ data_SS.0 }}</span>
+                                </div>
+                                <div class="d-flex align-items-center text-right">
+                                    <span class="font-weight-normal small">Salle 2 : {{ data_SS.1 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="pie_chart"></canvas></div>
+							<script src="/static/assets/js/Chart.min.js"></script>
+</div>
+</div>
+</div>
+</div>
+            <div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Formations</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="doughnut_chart"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+            <div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Formations</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="pie_chart_2"></canvas></div>
+</div>
+</div>
+</div>
+</div>
+
+            <div class="col-12 col-xl-6 mb-4">
+                <div class="col-12 mb-4">
+                    <div class="card border-light shadow-sm">
+                        <div class="card-body d-flex flex-row align-items-center flex-0 border-bottom">
+                            <div class="d-block">
+							<h2 class="h5"></h2>
+                                <div class="h6 font-weight-normal text-gray mb-2">Nombres Total Formations</div>
+                                <h2 class="h3">{{ Total }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body p-2">
+                            <div class="chart"><canvas id="polararea_chart"></canvas></div>
+							<script src="/static/assets/js/Chart.min.js"></script>
+							<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<script>
+	function color(){
+	const backgroundcolor = [];
+		for (i = 0; i < 20; i++) {
+		const r = Math.floor(Math.random() * 255);
+		const g = Math.floor(Math.random() * 255);
+		const b = Math.floor(Math.random() * 255);
+		backgroundcolor.push('rgba('+r+', '+g+', '+b+', 1)');
+		}
+		return backgroundcolor;
+		}
+    var config = {
+      type: "pie",
+      data: {
+        datasets: [{
+          data: {{ data_SS|safe }},
+          backgroundColor: color(),
+          label: 'Salle'
+        }],
+        labels: {{ labels_SS|safe }}
+		
+      },
+      options: {
+	  tooltips: {
+    enabled: true
+	},
+  plugins: {
+    datalabels: {
+      formatter: (value, ctx) => {
+
+        let sum = ctx.dataset._meta[0].total;
+        let percentage = (value * 100 / sum).toFixed(2) + "%";
+        return percentage;
+
+
+      },
+      color: '#fff',
+    }
+  },
+      title: {
+      display: true,
+      text: "Répartition Sessions par Salles"
+    }
+      }
+    };
+      
+	    var config_1 = {
+		type: "doughnut",
+      data: {
+        datasets: [{
+          data: {{ data_FF|safe }},
+          backgroundColor: color(),
+          label: 'Formateur'
+        }],
+        labels: {{ labels_FF|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Formations par Formateurs"
+    }
+      }
+    };
+	var config_2 = {
+		type: "polarArea",
+      data: {
+        datasets: [{
+          data: {{ data_CF|safe }},
+          backgroundColor: color(),
+          label: 'Client'
+        }],
+        labels: {{ labels_CF|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Formations par Clients"
+    }
+      }
+    };
+		var config_3 = {
+		type: "pie",
+      data: {
+        datasets: [{
+          data: {{ data_TF|safe }},
+          backgroundColor: color(),
+          label: 'Client'
+        }],
+        labels: {{ labels_TF|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Formations par Themes"
+    }
+      }
+    };
+	var config_4 = {
+		type: "line",
+      data: {
+        datasets: [{
+          data: {{ data_MS|safe }},
+          backgroundColor: color(),
+          label: 'Mois'
+        }],
+        labels: {{ labels_mois|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Sessions par Mois"
+    }
+      }
+    };
+	var config_5 = {
+		type: "bar",
+      data: {
+        datasets: [{
+          data: {{ data_MS|safe }},
+          backgroundColor: color(),
+          label: 'Mois'
+        }],
+        labels: {{ labels_mois|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Sessions par Mois"
+    }
+      }
+    };
+	var config_6 = {
+		type: "bar",
+      data: {
+        datasets: [{
+          data: {{ data_AS|safe }},
+          backgroundColor: color(),
+          label: 'Année'
+        }],
+        labels: {{ labels_annees|safe }}
+      },
+      options: {
+      title: {
+      display: true,
+      text: "Répartition Sessions par Années"
+    }
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie_chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+      var ctx_1 = document.getElementById('doughnut_chart').getContext('2d');
+      window.myDoughnut = new Chart(ctx_1, config_1);
+	  var ctx_2 = document.getElementById('polararea_chart').getContext('2d');
+      window.myPolararea = new Chart(ctx_2, config_2);
+	  var ctx_3 = document.getElementById('pie_chart_2').getContext('2d');
+      window.myPie_2 = new Chart(ctx_3, config_3);
+	  var ctx_4 = document.getElementById('line_chart').getContext('2d');
+      window.myLine = new Chart(ctx_4, config_4);
+	  var ctx_5 = document.getElementById('bar_chart').getContext('2d');
+      window.myBar = new Chart(ctx_5, config_5);
+	  var ctx_6 = document.getElementById('bar_chart_2').getContext('2d');
+      window.myBar_2 = new Chart(ctx_6, config_6);
+    };
+  </script>
+</div>
+</div>
+</div>
+</div>        
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+{% block javascripts %}{% endblock javascripts %}

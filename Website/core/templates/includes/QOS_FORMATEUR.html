@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link type="text/css" href="{%  static 'assets/bootstrap.min.css' %}" rel="stylesheet">  
+ <link href="http://fonts.cdnfonts.com/css/palace-script-mt" rel="stylesheet">
+
+<title> QUALITY OF SERVICE </title>
+
+<style>
+#bord_all{
+    width: 750px;
+    border: 1px solid black; 
+    border-radius: 5px;
+	height:950px;
+
+}
+div.image-{
+    background-image:url("{% static 'img/attestation1.png' %}");
+    background-repeat:no-repeat;
+    background-position:100% 100%    
+    }
+div.en-titre{
+    line-height: 0.5em
+}
+div.titre{
+font-size:20px;
+font-style:italic;
+}
+.form_control3-{
+    width:250px;
+    font-size:18px;
+    margin-left:30px;
+    font-family:'courier New', monospace;
+    color:black;
+    border:none;
+    background: none;
+
+}
+div.a-gauche{
+text-align:left;
+padding-left:20px;
+}
+.text-formateur{
+font-size:18px;
+font-style:italic;
+}
+div.tb-1{
+text-align:left;
+padding-left:20px;
+padding-right:35px;
+}
+.legend{
+text-align:left;
+padding-left:20px;
+font-style:italic;}
+.dt-1{
+	background:none;
+	padding-right:15px;
+	border:none;
+
+}
+.leh{
+font-style:italic;}
+div.a-drt{
+text-align:right;
+padding-right:20px;
+font-style:italic;
+}
+h6.signer{
+padding-right:80px;
+}
+#vr{
+	resize:none;
+	outline:0;
+	background:none;
+}
+</style>
+</head>
+<body>
+
+<div align="center">
+        <div  id="bord_all" class="image-">
+            <div class="en-titre">
+                <h2>CFAO TECHNOLOGIES AND ENERGIES</h2>
+                <h3>Centre de formation CFAO</h3>
+            </div>
+			<br><br>
+			<div class="titre" >
+			 <h1><u>QOS FORMATEUR</u> </h1>
+			</div>
+			<br>
+			<div class="a-gauche">
+			<label for='formateur' class="text-formateur"><b><u>FORMATEUR :</u></b></label>
+                <select class="form_control3-" id="nom" name="selected_car">
+                <option value="" disabled selected hidden> ............................</option>
+                {% for fr in Formateurs %}
+                        <option value="{{fr.nom}} {{fr.prenom}}">{{ fr.nom }} {{ fr.prenom }}</option>
+                {% endfor %} 
+                </select>
+			</div>
+			<br><br>
+			
+			  <legend class="legend"><u>Qualite de service: </U></legend>
+					   <div class="tb-1">
+					<table class="table">
+						  <thead>
+							<tr>
+							  <th scope="col" colspan="2"> </th>
+							  <th scope="col">très bon</th>
+							  <th scope="col">Bon</th>
+							  <th scope="col">Moyen</th>
+							  <th scope="col">Passable</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <th scope="row" colspan="2">Service administratif</th>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							</tr>
+							<tr>
+							  <th scope="row" colspan="2">Service logictique</th>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							</tr>
+							<tr>
+							  <th scope="row" colspan="2">Service technique</th>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							</tr>
+							<tr>
+							  <th scope="row" colspan="2">l'attitude des bénéficiaires</th>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							  <td><input type="checkbox" ></td>
+							</tr>
+						  </tbody>
+					 </table>
+					</div>
+					<br>
+					
+			            <legend class="leh"><u>Remarque complimentaire:</u></legend>
+					    <textarea id="vr" cols="70" rows="6"></textarea>
+			        <div class="a-drt">
+						<label for="start"><b><u>Edité le:</u></b> </label>
+						<input class="dt-1" type="date" id="start" name="trip-start"><br>
+					 <h5><u> Monsieur le formateur:</u></h5>
+					 <br><h6 class="signer">+</h6>
+					 </div>
+			<br><br><br>
+			      
+		</div>
+</div>	
+
+
+
+</body>
+</html>

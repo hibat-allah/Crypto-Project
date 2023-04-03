@@ -1,0 +1,94 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Register {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body_class %} bg-soft {% endblock body_class %}
+
+{% block content %}
+        <!-- Section -->
+        <section class="vh-lg-100 d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center form-bg-image" data-background="/static/assets/img/illustrations/signin.svg">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">
+                                    <a 
+                                       href="{% url 'index' %}">centre de formation++</a> - Se connecter
+                                </h1>
+                                <br />
+                                <p>
+                                    {% if msg %}
+                                        {{ msg | safe }}
+                                    {% else %}
+                                    {% endif %}                                     
+                                </p>    
+                            </div>
+                            
+                            <form method="post" action="">
+                            
+                                {% csrf_token %}
+								<!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Nom</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-shield"></span></span>
+                                        {{ userForm.last_name }}
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+								<!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Prénom</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-shield"></span></span>
+                                        {{ userForm.first_name }}
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Utilisateur</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-shield"></span></span>
+                                        {{ userForm.username }}
+                                    </div>
+                                    <span class="text-error">{{ userForm.username.errors }}</span>
+                                </div>
+                                <!-- End of Form -->
+									
+									<!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Mot de passe</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
+                                            {{ userForm.password }}
+                                        </div>  
+                                        <span class="text-error">{{ userForm.password.errors }}</span>
+                                    </div>
+                                    <!-- End of Form -->
+
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="form-check">
+                                            <a href="/advlogin" class="small text-right">Se connecter</a>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                <button type="submit" name="register" class="btn btn-block btn-primary">S'inscrire</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

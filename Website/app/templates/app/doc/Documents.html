@@ -1,0 +1,278 @@
+{% extends "layouts/base_doc.html" %}
+{% block title %} Editer Documemnts {% endblock %}
+{% load static %}
+{% block content %}
+
+  <main class="content">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Gestion de Centre de Formation</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Documents</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Editer Documents</h2>
+                <p class="mb-0">Liste des Documents</p>
+            </div>
+        </div>
+        
+      <section >
+         <div class="row box_container-  text-center">
+             <div class="col-lg-4 ">
+                      <div class="box- box-icon3-">
+                                <div class="icon-">01</div>
+                                <div class="content-">
+                                    <h3>ATTESTATION</h3>
+                                    <p>ÉDITER UNE ATTESTATION FIN DE FORMATION POUR UN BENEFICIAIRE D'UNE FORMATION </p>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="bn30">ÉDITER</button>
+                                </div>
+                      </div> 
+             </div>     
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title container" id="exampleModalLabel">ATTESTATION DE FORMATION</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                <div class="modal-body" id="text-" >
+                                  <h5></h5>
+                                   {% include 'includes/Attestation de formation.html'%}                                
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                  <button type="button" onclick="generatePDF()" class="btn btn-primary">Générer  le PDF</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
+                               
+                    
+                    <div class="col-lg-4 ">
+                      <div class="box- box-icon3-">
+                             <div class="icon-">02</div>
+                             <div class="content-">
+                               <h3>FEUILLE DE PR</h3>
+                               <p>CREER UNE FEUILLE DE PRESENCE POUR UNE SESSION D'UNE FORMATION</p>
+                               <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="bn30">ÉDITER</button>                             
+                             </div>  
+                       </div>
+                    </div>
+                        <!-- Modal2 -->
+                      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-fullscreen">
+                              <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title container" id="exampleModalLabel">FEUILLE DE PRESENCE </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="text2-">
+                                    {% include 'includes/Feuille de presence.html' %}
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    <button type="button" onclick="generatePDF2()" class="btn btn-primary">Générer  le PDF</button>
+                                    </div>
+                              </div>
+                          </div>
+                     </div> 
+       
+
+                     <div class="col-lg-4 ">
+                         <div class="box- box-icon3-">
+                               <div class="icon-">03</div>
+                               <div class="content-">
+                                 <h3>FACTURE</h3>
+                                 <p>ÉDITER LA FACTURE D'UN CLIENT QUI EST ASSOCIÉ A UNE FORMATION.</p>
+                                 <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="bn30">ÉDITER</button>                             
+                               </div>  
+                          </div>
+                     </div>
+                    <!-- Modal3 -->
+                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-fullscreen">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title container" id="exampleModalLabel"> FACTURE </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="text3-">
+                            {% include 'includes/Facture.html' %}
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" onclick="generatePDF3()" class="btn btn-primary">Générer  le PDF</button>
+                            </div>
+                          </div>
+                      </div>
+                    </div> 
+                    </div>
+                    <div class="row box_container-  text-center"> 
+                            <div class="col-lg-4 ">
+                              <div class="box- box-icon3-">
+                              <div class="icon-">04</div>
+                              <div class="content-">
+                                    <h3>QOS FORMATEUR</h3>
+                                  <p>L'AVIS DU FORMATEUR SUR LA QUALITÉ DU SERVICE FOURNIS(QOS, QUALITY OF SERVICE) ET DES BENEFICIAIRES</p>
+                                  <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" class="bn30">ÉDITER</button>
+                          </div> 
+                        </div>
+                      </div>                      
+								  
+                    <!-- Modal4 -->
+                    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title container" id="exampleModalLabel"> QOS FORMATEUR </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="text4-">
+                              <h5></h5>
+                            {% include 'includes/QOS_FORMATEUR.html' %}
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button type="button" onclick="generatePDF4()" class="btn btn-primary">Générer  le PDF</button>
+                            </div>
+                        </div>
+                     </div>
+                    </div> 
+                    
+					<div class="col-lg-4 ">
+                        <div class="box- box-icon3-">  
+                           <div class="icon-">05</div>
+                            <div class="content-">
+                                  <h3>QOS BENEFICAIRE</h3>
+                                  <p>L'AVIS DU BENEFICIAIRE SUR LA QUALITÉ DU SERVICE FOURNIS(QOS, QUALITY OF SERVICE) ET DU FORMATEUR</p>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal5" class="bn30">ÉDITER</button>
+                           </div>
+                        </div>  
+                  </div>
+                  <!-- Modal4 -->
+                  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title container" id="exampleModalLabel"> QOS BENEFICAIRE </h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body" id="text5-">
+                          
+                           {% include 'includes/QOS_BENEFICIAIRE.html' %}	
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                          <button type="button" onclick="generatePDF5()" class="btn btn-primary">Générer  le PDF</button>
+                          </div>
+                      </div>
+                   </div>
+                  </div> 
+		</div>
+     
+         
+     </section>
+ </main>
+
+{% endblock content %}
+{% block javascripts %}
+<script>
+  function generatePDF(){
+    //nom du fichier | file name
+    var nom_fichier = prompt("Nom du fichier PDF :");
+    //generer le pdf
+    var element = document.getElementById('text-');
+    var opt = {
+            margin:  0,
+            filename:     `${nom_fichier}.pdf`,
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'l',precision: 1,}
+        };
+    if(nom_fichier != null){
+        html2pdf().set(opt).from(element).save()
+    }
+    else {
+        alert("Veuillez choisir un nom ")
+    }
+  }
+  function generatePDF2(){
+    //nom du fichier | file name
+    var nom_fichier = prompt("Nom du fichier PDF :");
+    //generer le pdf
+    var element = document.getElementById('text2-');
+    var opt = {
+            margin: 0,
+            filename:     `${nom_fichier}.pdf`,
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 2,  },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait',precision: 1,}
+        };
+    if(nom_fichier != null){
+        html2pdf().set(opt).from(element).save()
+    }else {
+        alert("Veuillez choisir un nom ")
+    }
+}
+function generatePDF3(){
+  //nom du fichier | file name
+  var nom_fichier = prompt("Nom du fichier PDF :");
+  //generer le pdf
+  var element = document.getElementById('text3-');
+  var opt = {
+          margin:  0,
+          filename:     `${nom_fichier}.pdf`,
+          image:        { type: 'jpeg', quality: 1 },
+          html2canvas:  { scale: 2 },
+          jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait',precision: 1,}
+      };
+  if(nom_fichier != null){
+      html2pdf().set(opt).from(element).save()
+  }else {
+      alert("Veuillez choisir un nom ")
+  }
+}
+function generatePDF4(){
+ //nom du fichier | file name
+ var nom_fichier = prompt("Nom du fichier PDF :");
+ //generer le pdf
+ var element = document.getElementById('text4-');
+ var opt = {
+         margin:  0,
+         filename:     `${nom_fichier}.pdf`,
+         image:        { type: 'jpeg', quality: 1 },
+         html2canvas:  { scale: 2 },
+         jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait',precision: 1,}
+     };
+ if(nom_fichier != null){
+     html2pdf().set(opt).from(element).save()
+ }else {
+     alert("Veuillez choisir un nom ")
+ }
+}
+function generatePDF5(){
+  //nom du fichier | file name
+  var nom_fichier = prompt("Nom du fichier PDF :");
+  //generer le pdf
+  var element = document.getElementById('text5-');
+      var opt = {
+        margin:  0,
+        filename:     `${nom_fichier}.pdf`,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait',precision: 1, }
+    };
+      if(nom_fichier != null){
+        html2pdf().set(opt).from(element).save()}
+      else{
+        alert("Veuillez choisir un nom ")
+      }
+  
+}  
+</script>
+
+{% endblock javascripts %}

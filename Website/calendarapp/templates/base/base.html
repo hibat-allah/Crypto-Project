@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta name="description" content="Event Dashboard" />
+       
+        <title>{% block title %}{% endblock title  %}</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+		    <!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="120x120" href="/static/assets/img/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/static/assets/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/static/assets/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/static/assets/img/favicon/site.webmanifest">
+		<link rel="mask-icon" href="/static/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="theme-color" content="#ffffff">
+
+        {% block extracss %}
+        {% endblock extracss %}
+    </head>
+    <body class="app sidebar-mini">
+        <!-- Navbar-->
+        <header class="app-header">
+            <a class="app-header__logo" href="#">Calendrier</a>
+            <!-- Sidebar toggle button-->
+            <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        </header>
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar">
+            <ul class="app-menu">
+                <li>
+                    <a class="app-menu__item" href="{% url 'calendarapp:calendar' %}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Calendrier</span></a>
+                </li>
+                        <li>
+                            <a class="app-menu__item" href="{% url 'calendarapp:running_events' %}"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label"> Sessions En cours</span></a>
+                        </li>
+                        <li>
+                            <a class="app-menu__item" href="{% url 'calendarapp:upcoming_events' %}"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label"> Sessions Non commencées</span></a>
+                        </li>
+						<li>
+                            <a class="app-menu__item" href="{% url 'calendarapp:finished_events' %}"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label"> Sessions Términées</span></a>
+                        </li>
+                        <li>
+                            <a class="app-menu__item" href="{% url 'calendarapp:all_events' %}"><i class="app-menu__icon fa fa-circle-o"></i><span class="app-menu__label"> Toutes les sessions</span></a>
+                        </li>
+                <li>
+                    <a class="app-menu__item" href="/formations/"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Quitter</span></a>
+                </li>
+            </ul>
+        </aside>
+        <main class="app-content">
+            <div class="app-title">
+                {% block breadcrumb %}
+                {% endblock breadcrumb %}
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        <!-- Essential javascripts for application to work-->
+		{% include 'base/js.html' %}
+		{% include 'includes/scripts.html' %}
+        {% block extrascripts %}
+        {% endblock extrascripts %}
+    </body>
+</html>

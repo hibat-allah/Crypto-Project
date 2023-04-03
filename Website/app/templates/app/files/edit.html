@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Editer File {% endblock %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation.html' %}
+
+        <div class="py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                    <li class="breadcrumb-item"><a href="#">Components</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'files' %}">Files</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">File #{{ file.id }}</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between w-100 flex-wrap">
+                <div class="mb-3 mb-lg-0">
+                    <h1 class="h4">Editer File</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row item-row">
+            <div class="col-12">
+                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                    <h2 class="h5 mb-4">Information File</h2>
+                    <form action="{% url 'files' file.id %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for field in form %}
+									<div class="col-md-6 mb-3">
+                                    <div>{{ field.label_tag }}{{ field }}</div>
+									</div>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-3">
+                            <a class="btn btn-danger delete_item" data-href="{% url 'files' file.id 'single' %}">Supprimer</a>
+                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+		
+    </main>
+
+{% endblock content %}

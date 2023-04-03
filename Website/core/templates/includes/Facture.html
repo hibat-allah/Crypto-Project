@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" href="{%  static 'assets/bootstrap.min.css' %}" rel="stylesheet">  
+<head>
+<title>Facture</title>
+<style>
+#bord_all{
+    width: 750px;
+    border:solid 3px black; 
+    border-radius: 5px;
+}
+div.titre{
+    line-height: 0.5em
+}
+div.en-tete{
+    text-align: right;
+    padding-right: 15px;
+    line-height: 0.2rem
+
+}
+div.colonne1{
+    text-align: left;
+    padding-left: 15px;
+    line-height: 0.2rem;
+    width:400px;
+    float:left;
+}
+div.colonne2{
+    text-align: right;
+    width:400px;
+    float:right;   
+}
+div.colonne3{
+    text-align: left;
+    width:400px;
+    float:left; 
+    padding-left: 10px;
+}
+div.colonne4{
+    text-align: right;
+    width:450px;
+    float:right; 
+    padding-right: 20px;
+}
+table{
+    
+    border-collapse: collapse;
+    width:700px;
+    column-width: auto;
+    
+}
+td 
+{
+    border: 1px solid black; 
+    width:90px;
+}
+div.table{
+    padding-left : 20px;
+    padding-right: 15px;
+}
+.text2{
+    width:200px;
+}
+.mytext, .text3, .text4{
+    width:100px ;
+}
+.mytext2{
+    width:120px ;
+}
+.form_control1{
+    font-size:20px;
+    border:none;
+    margin-left:15px;
+    
+}
+
+</style>
+</head>
+
+
+<body>
+    <br>
+    <div align="center">
+        <div  id="bord_all" >
+            <div class="titre">
+                <h3>CFAO TECHNOLOGIES AND ENERGIES</h3>
+                <h4>Centre de formation CFAO</h4>
+            </div>
+            <br><br>
+            <div class="en-tete"><h2>FACTURE PROFORMA</h2>
+                <label for="client"><b>Numero :</b></label>
+                <input type="number" placeholder='numero de facture'>
+            </div>
+            <br><br>
+            <div class="colonne1">
+                  <h4>Centre de formation CFAO</h4>
+                  <h5>Lotissement Bensmaia، 15 Chemin Cheikh Bachir El Ibrahim, El Biar</h5>
+                  <h5>tel: +213 023053836</h5>
+                  <h5>Email: Cfao_technologies_algerie@gmail.com   </h5>
+                  <h5>Prefecture Alger</h5>
+                  <label for="client"><b>Declaration d'activite n'</b></label>
+                  <input type="number" >
+            </div>
+            <br><br><br><br><br><br><br>
+            <div class="colonne2">
+                <h5> <label for="client"><b>Adressée a :</b></label>
+                    <select class="form_control1" id="client" name="selected_car">
+                        <option value="" disabled selected hidden> Sélectionner un Client</option>
+                        {% for cl in Clients %}
+                            <option value="{{cl.id}}">{{ cl.nom }}</option>
+                        {% endfor %} 
+                      </select>
+
+            </div>
+            <br><br><br><br><br>
+            <div class="table">
+            <div align="left">
+            <table>
+                <tr>
+                    <td  align="center">Theme de la formation</td>
+                    <td align="center">P.U.H.T.  /DA</td>
+                    <td align="center">Rem  /DA</td>
+                    <td align="center" >TVA %</td>
+                    <td align="center">Total H.T. /DA</td>
+                </tr>
+                <tr>
+                    <td><select class="form_control1" id="theme" name="selected_theme" >
+                        <option value="" disabled selected hidden> Sélectionner un theme</option>
+                        {% for th in Themes %}
+                             <option value="{{th.nom}}">{{ th.nom }}</option>
+                        {% endfor %} 
+                     </select></td>
+                    <td><input  type="number" class="mytext"></td>
+                    <td><input  type="number" class="text3"></td>
+                    <td><input  type="number" min="0" max="100" class="mytext2"></td>
+                    <td><input  type="number" class="text4"></td>
+                </tr>
+             </table>
+             </div>
+             </div>
+            <br><br>
+            <div class="colonne3">
+                <label for="client" >Total H.T.</label>
+                <input type="number" >
+                <br><br>
+                <label for="client" >TVA&emsp;&emsp;</label>
+                <input type="number" >
+                <br><br>
+                <label for="client" >Total T.T.C</label>
+                <input type="number"  >
+                
+                
+            </div>
+            <div class="colonne4">
+                <h5><u>Service Administratif CFAO :</u></h5>
+                <br><br>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br>
+
+        </div>
+    </div>
+            
+
+
+</body>
+</html>
+ 

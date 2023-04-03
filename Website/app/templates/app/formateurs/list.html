@@ -1,0 +1,117 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Formateurs {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation.html' %}
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">centre de formations++</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Formateurs</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Formateurs</h2>
+                <p class="mb-0">Liste des Formateurs</p>
+            </div>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-primary" href="{% url 'exportcsv_formateurs' %}" >Exporter</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-settings mb-4">
+            <div class="row align-items-center justify-content-between">
+                <div class="col col-md-6 col-lg-3 col-xl-4">
+                    <form action="{% url 'formateurs' %}" method="get">
+                        <div class="input-group">
+                            <span class="input-group-text" nom="basic-addon2"><span class="fas fa-search"></span></span>
+                            <input type="text" name="search" class="form-control" placeholder="Rechercher par Nom ou Theme">
+                        </div>		
+                    </form>
+                </div>
+				<div class="col-7">
+				<a class="btn btn-primary" href="{% url 'create_formateur' %}">Nouveau</a>	
+                </div>
+                
+			</div>
+        </div>
+
+        <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+					<th>CN</th>
+                    <th>Nom</th>
+					<th>Prenom</th>
+					<th>Date de Naissance</th>
+					<th>Genre</th>
+					<th>Adresse</th>
+					<th>Theme</th>
+					<th>CV</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Item -->
+                {% if formateurs is not True %}
+                    {% for formateur in formateurs %}
+                        <tr class="item-row" data-edit="{% url 'formateurs' formateur.id 'edit' %}"
+                            data-detail="{% url 'formateurs' formateur.id %}">
+							<td><span class="font-weight-bold">{{ formateur.CN }}</span></td>
+                            <td><span class="font-weight-bold">{{ formateur.nom }}</span></td>
+                            <td><span class="font-weight-bold">{{ formateur.prenom }}</span></td>
+                            <td><span class="font-weight-bold">{{ formateur.datenaissance |date:'d M,Y'}}</span></td>
+							<td><span class="font-weight-bold">{{ formateur.get_genre_display }}</span></td>
+                            <td><span class="font-weight-bold">{{ formateur.adresse }}</span></td>
+                            <td><span class="font-weight-bold">{{ formateur.theme.all|join:", " }}</span></td>
+							<td><a href="{{ formateur.CV.url }}" class="btn btn-sm btn-outline-primary" style="margin-bottom: 5px;">CV</a></td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item edit_item"
+                                           href="{% url 'formateurs' formateur.id 'edit' %}">
+                                            <span class="fas fa-edit mr-2"></span>Editer
+                                        </a>
+                                        <a class="dropdown-item text-danger delete_item"
+                                           data-href="{% url 'formateurs' formateur.id %}">
+                                            <span class="fas fa-trash-alt mr-2"></span>Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+            {{ formateurs.paginateur }}
+
+        </div>
+
+        
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

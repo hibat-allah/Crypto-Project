@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Attestation de formation </title>
+<link href="http://fonts.cdnfonts.com/css/palace-script-mt" rel="stylesheet">
+<style>
+ @import url('http://fonts.cdnfonts.com/css/palace-script-mt');
+ 
+ 
+ div.image-{
+    background-image:url("{% static 'img/attestation1.png' %}");
+    background-repeat:no-repeat;
+    background-position:100% 100%    
+    }
+#bord_all-{
+    width: 1000px;
+    border:solid 3px black; 
+    border-radius: 5px;
+
+}
+#rcorners1- {
+  border-radius: 25px;
+  background: #b5c8e4;
+  width: 700px;
+}
+.p2- {
+ font-family:'courier New', monospace;
+    line-height: 0.5em;
+    font-size : 48px;
+}
+
+
+.p4-, .p3- {
+    line-height: 0.5em;
+}
+
+h5.img1-{line-height: 0.5em;}
+.p5-, .p6-{
+    line-height: 0.2rem;
+}
+div.centr- { text-align: center;}
+div.a-droite- {text-align: right;
+              padding-right: 15px;
+              line-height: 0.2rem
+               font-size:20px;}
+div.a-gauche- {text-align: left;
+              padding-left: 15px;
+              line-height: 0.2rem}
+div.logo-{
+    text-align: center;
+    padding-right: 15px ;
+}
+label- {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+.form_control1-{
+    width:400px;
+    font-size:48px;
+    font-family: 'Brush Script MT',cursive;
+    margin-right:35px;
+    background : none;
+    color:black;
+    border:none;
+}
+.form_control2-{
+    width:200px;
+    font-size:28px;
+    margin-left:30px;
+    font-family:Georgia, serif;
+    color:black;
+    border:none;
+    background: none;
+}
+.form_control3-{
+    width:250px;
+    font-size:18px;
+    margin-left:30px;
+    font-family:'courier New', monospace;
+    color:black;
+    border:none;
+    background: none;
+
+}
+.dt4-{
+    font-size:12px;
+    background:none;
+    border:none;
+    
+}
+.tit{
+    font-size:24px;
+    font-style: font-family:Georgia, serif;
+}
+</style>
+</head>
+
+<body>
+       <br>
+                <div align="center">
+                <div  id="bord_all-" class="image-">
+                <br>
+                <div align="center" >
+                <div id="rcorners1-">
+                <h2 class="tit"><i> مركز التكوين في الإعلام الآلي و الإتصالات
+                <br> Centre de formation en informatique et telecommunication</i></h2>
+                </div>
+                <br>
+                <h1 class="p2-" > <b>Attestation de formation</b> </h1>
+                <br>
+                <h3 class="p3-">le présent certificat atteste que </h3>
+                <label for="client"><b>MONSIEUR :</b></label>
+                    <select class="form_control1-" id="beneficiaire" name="selected_car">
+                        <option value="" disabled selected hidden> ........................</option>
+                        {% for bn in Beneficiaires %}
+                            <option value="{{bn.CN}}">{{ bn.nom }} {{bn.prenom}}</option>
+                        {% endfor %} 
+                    </select>
+                <h5 class="p4-"> A suivi avec succès la formation</h5>
+                <h3 class="p6-">
+                    <label for="client"><b>Theme :</b></label>
+                    <select class="form_control2-" id="theme" data-theme-url="{% url 'ajax_load_theme' %}" name="selected_car" >
+                        <option value="" disabled selected hidden> ...........</option>
+						{% for th in Themes %}
+                            <option value="{{th.nom}}">{{ th.nom }}</option>
+                        {% endfor %} 
+                    </select></h3>
+                <h5 class="p5-">au sein du centre de formation CFAO technologies</h5>
+
+                <br>
+                </div>
+              <br>
+                <div class="a-droite-">
+                    <h4><u>Responsable du centre de formation</u></h4>
+                </div>
+                <div class="a-gauche-"> 
+                <label for='formateur'><b><u>FORMATEUR :</u></b></label>
+                <select class="form_control3-" id="formateur" data-formateurs-url="{% url 'ajax_load_formateurs_bis' %}" name="selected_car">
+                <option value="" disabled selected hidden> ............................</option>
+                {% for fr in Formateurs %}
+                        <option value="{{ fr.nom }} {{fr.prenom}}">{{ fr.nom }} {{fr.prenom}}</option>
+                {% endfor %} 
+                </select>
+                <br>
+                    <label for="start"><b><u>Editée le:</u></b> </label>
+                    <input class="dt4-" type="date" id="start" name="trip-start">
+                </div>
+                <div class="logo-">
+                <IMG src="{% static 'img/logo_cfao.png' %}" alt="photo"  width="60" height="30">
+                </div>
+                </div>
+                </div>
+        
+
+</body>
+
+</html>
+
+<script type="application/javascript" src="{% static 'app_assets/jquery/js/jquery-3.5.1.min.js' %}"></script>
+
+<script>
+    $("#beneficiaire").change(function () {
+	  var url1 = $("#theme").attr("data-theme-url");  
+      var beneficiaire = $(this).val();  
+      $.ajax({                      
+        url: url1,                    
+        data: {
+          'beneficiaire': beneficiaire      
+        },
+        success: function (data) {  
+          $("#theme").html(data);  
+        }
+      });
+	  var url2 = $("#formateur").attr("data-formateurs-url");  
+      var beneficiaire = $(this).val();  
+      $.ajax({                      
+        url: url2,                    
+        data: {
+          'beneficiaire': beneficiaire      
+        },
+        success: function (data) {  
+          $("#formateur").html(data);  
+        }
+      });
+
+    });
+  </script>

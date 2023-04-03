@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Sessionss Terminées {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation.html' %}
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">centre de formation++</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sessions</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Sessions</h2>
+                <p class="mb-0">Liste des Sessions Terminées</p>
+            </div>
+            
+        </div>
+
+
+        <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+					<th>Formation</th>
+					<th>Salle</th>
+					<th>Formateur</th>
+					<th>Client</th>
+					<th>Date & Heure Debut</th>
+					<th>Date & Heure Fin</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Item -->
+                {% if object_list is not True %}
+                    {% for event in object_list %}
+                        <tr class="item-row">
+							<td><span class="font-weight-bold">{{ event.title }}</span></td>
+                            <td><span class="font-weight-bold">{{ event.formation }}</span></td>
+                            <td><span class="font-weight-bold">{{ event.salle }}</span></td>
+							<td><span class="font-weight-bold">{{ event.formation.formateur }}</span></td>
+                            <td><span class="font-weight-bold">{{ event.formation.client }}</span></td>
+                            <td><span class="font-weight-bold">{{ event.start_time|date:'d M,Y H:i' }}</span></td>
+                            <td><span class="font-weight-bold">{{ event.end_time|date:'d M,Y H:i' }}</span></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+
+            {{ object_list.pagination }}
+
+        </div>
+
+        
+
+    </main>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+                              

@@ -1,0 +1,39 @@
+{% if form %}
+    <td>{{ instance.id }}</td>
+    <form>
+        {% for field in form %}
+            <td>{{ field }}</td>
+        {% endfor %}
+    </form>
+    <td>
+        <button class="btn-sm btn-warning cancel_form"><i class="fa fa-times-circle"></i></button>
+        <button class="btn-sm btn-success save_form"><i class="fa fa-save"></i></button>
+    </td>
+{% else %}
+    <td><span class="font-weight-bold">{{ instance.id }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.nom }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.prenom }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.adresse }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.age }}</span></td>
+    <td><span class="font-weight-normal">{{ instance.client }}</span></td>
+    <td>
+        <div class="btn-group">
+            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="icon icon-sm">
+                        <span class="fas fa-ellipsis-h icon-dark"></span>
+                    </span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item Editer_item" href="{% url 'beneficiaires' instance.id 'Editer' %}">
+                    <span class="fas fa-Editer mr-2"></span>Editer
+                </a>
+                <a class="dropdown-item text-danger delete_item"
+                   data-href="{% url 'beneficiaires' instance.id %}">
+                    <span class="fas fa-trash-alt mr-2"></span>Supprimer
+                </a>
+            </div>
+        </div>
+    </td>
+{% endif %}

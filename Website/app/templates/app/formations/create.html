@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Ajouter Formation {% endblock %}
+
+{% block content %}
+
+    <main class="content">
+
+        {% include 'includes/navigation.html' %}
+
+        <div class="py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                    <li class="breadcrumb-item"><a href="#">Components</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'formations' %}">Formations</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Formation </li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between w-100 flex-wrap">
+                <div class="mb-3 mb-lg-0">
+                    <h1 class="h4">Ajouter Formation</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row item-row">
+            <div class="col-12">
+                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                    <h2 class="h5 mb-4">Information Formation</h2>
+                    <form action="" method="post" id="formationForm" data-formateurs-url="{% url 'ajax_load_formateurs' %}" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for field in form %}
+                                <div class="col-md-6 mb-3">
+                                    <div>{{ field.label_tag }}{{ field }}</div>
+                                </div>
+                            {% endfor %}
+							{{ form.errors }}
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+		
+    </main>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $("#selection_theme").change(function () {
+      var url = $("#formationForm").attr("data-formateurs-url");  
+      var themeId = $(this).val();  
+      $.ajax({                      
+        url: url,                    
+        data: {
+          'theme': themeId       
+        },
+        success: function (data) {  
+          $("#selection_formateur").html(data);  
+        }
+      });
+
+    });
+  </script>
+
+{% endblock content %}

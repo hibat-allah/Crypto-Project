@@ -1,0 +1,3 @@
+{% for formateur in formateurs %}
+<option value="{{ formateur.pk }}">{{ formateur.nom }} {{ formateur.prenom }}</option>
+{% endfor %}

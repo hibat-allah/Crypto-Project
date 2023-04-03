@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" href="{%  static 'assets/bootstrap.min.css' %}" rel="stylesheet">  
+<title>Feuille de presence</title>
+<style>
+#bord_all{
+    width: 750px;
+    border:solid 3px black; 
+    border-radius: 5px;
+    
+}
+
+div.titre
+{
+  padding-top:20px;
+    line-height: 0.5em;
+    font-size:'courier New', monospace;
+    text-align:center;
+    font-size:22px;
+}
+div.intitule
+{
+    text-align: left;
+    padding-left: 30px;
+
+}
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+div.tb{
+    padding-right :15px;
+}
+.form_control1 {
+  font-size:18px;
+  border:none;
+
+}
+.form_control2 {
+  font-size:18px;
+  border:none;
+
+}
+.form_control3{
+  font-size:18px;
+  border:none;
+
+}
+.dt1{
+  font-size:18px;
+  border:none;
+}
+.dt2{
+  font-size:18px;
+  border:none;
+}
+h1.tit{
+  font-style:italic;
+  font-size:32px;
+}
+</style>
+
+</head>
+<body>
+  <br>
+<div align="center">
+<div  id="bord_all" >
+    <div class="titre">
+<h3>CFAO TECHNOLOGIES AND ENERGIES</h3
+<h4>Centre de formation CFAO</h4>
+</div>
+<br>
+<h1 class="tit">FEUILLE DE PRESENCE </h1>
+
+<div class="intitule"
+<label for="intitule_du_formation"><b><U>INTITULE DE LA FORMATION :</U></b></label>
+<select class="form_control1" id="nom" name="selected_theme" >
+    <option value="" disabled selected hidden> sélectionner un theme</option>
+    {% for th in Themes %}
+         <option value="{{th.nom}}">{{ th.nom }}</option>
+    {% endfor %} 
+ </select>
+<br><br>
+<label for="client"><b><u>CLIENT :</u></b></label>
+<select class="form_control2" id="nom" name="selected_client">
+    <option value="" disabled selected hidden> sélectionner un Client</option>
+    {% for cl in Clients %}
+        <option value="{{cl.nom}}">{{ cl.nom }}</option>
+    {% endfor %} 
+  </select>
+<br>
+<label for="start"><b><u>JOURNEE DU :</u></b> </label>
+<input class="dt1" type="date" id="start" name="trip-start" > <b>&nbsp;&nbsp;Au&nbsp;&nbsp;</b> <input class="dt2" type="date" id="start2" name="trip-start2" >
+<br>
+<label for="Formateur"><b><u>FORMATEUR :</u></b></label>
+<select class="form_control3" id="nom" name="selected_formateur">
+    <option value="" disabled selected hidden> sélectionner un formateur</option>
+    {% for fr in Formateurs %}
+         <option value="{{fr.nom}} {{fr.prenom}}">{{ fr.nom }} {{ fr.prenom }}</option>
+    {% endfor %} 
+ </select>
+ 
+ <div class="tb">
+ <table class="table table-bordered">
+	  <thead class="table-dark">
+	  <tr>
+	    <th scorp="col"colspan="2"> NOM & PRENOM </th>
+		<th scorp="col"colspan="2"> DIMANCHE</th>
+		<th scorp="col"colspan="2"> LUNDI</th>
+		<th scorp="col"colspan="2"> MARDI</th>
+		<th scorp="col"colspan="2"> MARCREDI</th>
+		<th scorp="col"colspan="2"> JEUDI</th>
+	  </tr>
+	  </thead>
+
+ <tbody>
+    <tr>
+      <td colspan="2"></td>
+      <td>AM</td>
+      <td>PM</td>
+      <td>AM</td>
+      <td>PM</td>
+	  <td>AM</td>
+      <td>PM</td>
+	  <td>AM</td>
+      <td>PM</td>
+	  <td>AM</td>
+      <td>PM</td>
+    </tr>
+    <tr>
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+     <tr>
+     <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	<tr>
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	<tr>
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	<tr>
+     <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	 <tr>
+     <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	 <tr>
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+	 <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    <tr rowspan="2">
+      <td colspan="2">...............</td>
+	  <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</body>
